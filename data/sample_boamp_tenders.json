@@ -1,0 +1,92 @@
+[
+  {
+    "id_annonce": "26-109796",
+    "objet": "Exploitation des déchetteries et Végé'tri d'Orléans Métropole et valorisation des déchets (8 lots)",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": null,
+    "acheteur": "Acheteur_Public_1",
+    "departement": "45",
+    "type_marche": "SERVICES"
+  },
+  {
+    "id_annonce": "26-109797",
+    "objet": "Fourniture, pose et location d'une installation mobile de traitement de la Turbidité sur le site de la station de Monas",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": null,
+    "acheteur": "Acheteur_Public_2",
+    "departement": "86",
+    "type_marche": "SERVICES"
+  },
+  {
+    "id_annonce": "26-109701",
+    "objet": "Entretien et réparation de divers véhicules de la flotte automobile de la ville",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": "2026-11-23T10:00:00+00:00",
+    "acheteur": "Acheteur_Public_3",
+    "departement": "95",
+    "type_marche": "SERVICES"
+  },
+  {
+    "id_annonce": "26-109739",
+    "objet": "Interprétariat par déplacement physique",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": "2026-11-26T15:00:00+00:00",
+    "acheteur": "Acheteur_Public_4",
+    "departement": "67",
+    "type_marche": "SERVICES"
+  },
+  {
+    "id_annonce": "26-109757",
+    "objet": "Concession de service public relative à la gestion et l'exploitation de quatre EAJE et un LAEP",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": "2026-12-11T11:00:00+00:00",
+    "acheteur": "Acheteur_Public_5",
+    "departement": "94",
+    "type_marche": "SERVICES"
+  },
+  {
+    "id_annonce": "26-109780",
+    "objet": "Prestation d'arrachage dynamique et de collecte depuis la voie d'eau, de plantes aquatiques envahissantes sur le Canal de la Marne au Rhin Est (CMRE), selon la norme européenne CWA 17916:2022",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": "2026-12-14T15:00:00+00:00",
+    "acheteur": "Acheteur_Public_6",
+    "departement": "54",
+    "type_marche": "SERVICES"
+  },
+  {
+    "id_annonce": "26-109821",
+    "objet": "DTEM 2026-253AO_ASSU_CVG1_CHU",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": "2026-12-18T12:00:59+00:00",
+    "acheteur": "Acheteur_Public_7",
+    "departement": "49",
+    "type_marche": "SERVICES"
+  },
+  {
+    "id_annonce": "26-109907",
+    "objet": "Réception, tri, valorisation et vente d'objets issus du réemploi sur le territoire des communes de Draveil, Montgeron et Vigneux-Sur-Seine",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": "2026-12-14T11:00:00+00:00",
+    "acheteur": "Acheteur_Public_8",
+    "departement": "91",
+    "type_marche": "SERVICES"
+  },
+  {
+    "id_annonce": "26-109945",
+    "objet": "EVALUATION DE L'OPERATION PROGRAMMEE D'AMELIORATION DE L'HABITAT RENOUVELLEMENT URBAIN (OPAH-RU) CŒURS DE VILLES LENS, LIÉVIN et HARNES 2021-2026",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": "2026-12-14T10:00:00+00:00",
+    "acheteur": "Acheteur_Public_9",
+    "departement": "62",
+    "type_marche": "SERVICES"
+  },
+  {
+    "id_annonce": "26-109669",
+    "objet": "FOURNITURES ET PRESTATIONS DE SERVICES POUR L'ORGANISATION DE MIEL VERT 2027",
+    "date_parution": "2026-11-13",
+    "date_limite_reponse": "2026-11-25T08:00:00+00:00",
+    "acheteur": "Acheteur_Public_10",
+    "departement": "974",
+    "type_marche": "SERVICES"
+  }
+]
