@@ -1,6 +1,6 @@
-from datetime import datetime
+﻿from datetime import datetime
 from enum import Enum
-from typing import List, Optional
+from typing import List, Literal, Optional
 from pydantic import BaseModel, Field, computed_field, field_validator
 
 
@@ -69,3 +69,13 @@ class TenderAnalysisResult(TenderBase):
     total_keyword_mentions: int = 0
     statut: TenderStatus = TenderStatus.EN_ATTENTE
     ai_summary: Optional[str] = Field(None, description="Résumé intelligent généré par Gemini")
+
+
+class AITenderEvaluation(BaseModel):
+    """Schéma structuré imposé à Gemini pour l'analyse d'un appel d'offres"""
+    cleaned_title: str = Field(..., description="Titre de l'appel d'offres reformulé de manière claire et lisible")
+    executive_summary: str = Field(..., description="Résumé exécutif en 2 à 3 phrases maximum")
+    key_requirements: List[str] = Field(default_factory=list, description="Liste des exigences techniques ou administratives clés")
+    risk_factors: List[str] = Field(default_factory=list, description="Points de vigilance ou risques identifiés")
+    relevance_score: int = Field(..., ge=1, le=10, description="Note d'attractivité et de clarté de 1 à 10")
+    recommended_action: Literal["À étudier", "À ignorer"] = Field(..., description="Décision recommandée")
