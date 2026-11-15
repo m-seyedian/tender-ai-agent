@@ -30,3 +30,4 @@ tender-ai-agent/
 ├── tests/          # Unit and integration tests
 ├── .env.example    # Template for environment variables
 └── requirements.txt
+
