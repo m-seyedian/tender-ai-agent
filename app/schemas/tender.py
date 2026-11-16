@@ -1,6 +1,6 @@
 ﻿from datetime import datetime
 from enum import Enum
-from typing import List, Literal, Optional
+from typing import Dict, List, Literal, Optional
 from pydantic import BaseModel, Field, computed_field, field_validator
 
 
@@ -79,3 +79,89 @@ class AITenderEvaluation(BaseModel):
     risk_factors: List[str] = Field(default_factory=list, description="Points de vigilance ou risques identifiés")
     relevance_score: int = Field(..., ge=1, le=10, description="Note d'attractivité et de clarté de 1 à 10")
     recommended_action: Literal["À étudier", "À ignorer"] = Field(..., description="Décision recommandée")
+
+
+# --- Nouveaux schémas pour les endpoints /tenders/clean et /tenders/batch ---
+
+class FilterCriteriaSchema(BaseModel):
+    """Critères de filtrage envoyés via l'API"""
+    allowed_departments: List[str] = Field(default_factory=list, description="Ex: ['75', '91', '92']")
+    target_cpv_prefixes: List[str] = Field(default_factory=list, description="Ex: ['7200', '48000000']")
+    keywords: List[str] = Field(default_factory=list, description="Mots-clés recherchés")
+    min_keyword_mentions: int = Field(default=1, ge=1)
+
+
+class RawTenderInput(BaseModel):
+    """Données brutes d'un appel d'offres à nettoyer et évaluer"""
+    id_annonce: str = Field(..., min_length=1, description="Identifiant de l'annonce BOAMP")
+    objet: str = Field(..., min_length=1, description="Titre brut pouvant contenir du HTML")
+    description: Optional[str] = Field(None, description="Description détaillée brute")
+    date_parution: Optional[str] = Field(None, description="Date de publication brute (ISO ou DD/MM/YYYY)")
+    date_limite_reponse: Optional[str] = Field(None, description="Date limite brute (ISO ou DD/MM/YYYY)")
+    acheteur: Optional[str] = Field(None, description="Nom de l'acheteur public")
+    departement: Optional[str] = Field(None, description="Code département")
+    type_marche: Optional[str] = Field(None, description="Type de marché")
+    raw_cpv_codes: List[str] = Field(default_factory=list, description="Codes CPV bruts éventuels")
+
+
+class CleanTenderRequest(BaseModel):
+    """Requête pour l'endpoint POST /tenders/clean"""
+    tender: RawTenderInput
+    criteria: FilterCriteriaSchema = Field(default_factory=FilterCriteriaSchema)
+
+
+class CleanedTenderOutput(BaseModel):
+    """Résultat déterministe après nettoyage et validation (sans appel IA)"""
+    matching_key: str
+    id_annonce: str
+    cleaned_objet: str
+    cleaned_description: str
+    normalized_date_parution: Optional[str] = None
+    normalized_date_limite: Optional[str] = None
+    estimated_amount_eur: Optional[float] = None
+    acheteur: Optional[str] = None
+    departement: Optional[str] = None
+    type_marche: Optional[str] = None
+    extracted_cpv_codes: List[str] = Field(default_factory=list)
+    matched_keywords: Dict[str, int] = Field(default_factory=dict)
+    total_keyword_mentions: int = 0
+    is_eligible: bool
+    rejection_reason: Optional[str] = None
+
+
+class BatchTenderRequest(BaseModel):
+    """Requête batch acceptant jusqu'à 50 annonces avec plafond configurable d'appels IA"""
+    tenders: List[RawTenderInput] = Field(
+        ...,
+        min_length=1,
+        max_length=50,
+        description="Liste de 1 à 50 appels d'offres bruts à filtrer et analyser",
+    )
+    criteria: FilterCriteriaSchema = Field(default_factory=FilterCriteriaSchema)
+    max_ai_calls: int = Field(
+        default=5,
+        ge=1,
+        le=20,
+        description="Nombre maximum d'appels envoyés à Gemini dans ce batch (protection du quota gratuit)",
+    )
+
+
+class BatchTenderItemResult(BaseModel):
+    """Résultat individuel pour chaque appel d'offres du batch"""
+    id_annonce: str
+    matching_key: str
+    status: Literal["analyzed", "skipped", "quota_deferred", "error"]
+    cleaned_data: CleanedTenderOutput
+    ai_evaluation: Optional[AITenderEvaluation] = None
+    error_detail: Optional[str] = None
+
+
+class BatchTenderResponse(BaseModel):
+    """Réponse globale de l'endpoint POST /tenders/batch"""
+    total_received: int
+    total_eligible: int
+    total_analyzed: int
+    total_skipped: int
+    total_deferred: int
+    total_failed: int
+    results: List[BatchTenderItemResult]
