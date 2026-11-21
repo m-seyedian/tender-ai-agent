@@ -2,7 +2,7 @@
 from typing import Optional
 
 from app.rag.chunker import RecursiveTextChunker
-from app.rag.loader import DocumentLoader
+from app.rag.loader import load_document
 from app.rag.vector_store import ChromaVectorStore
 from app.schemas.document import IngestResponse, TenderContext
 
@@ -16,13 +16,12 @@ class TenderIngestionPipeline:
         chunk_size: int = 1000,
         chunk_overlap: int = 200,
     ) -> None:
-        self.loader = DocumentLoader()
         self.chunker = RecursiveTextChunker(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
         self.vector_store = vector_store or ChromaVectorStore()
 
     def ingest_file(self, file_path: str | Path, tender_context: TenderContext) -> IngestResponse:
         path = Path(file_path)
-        pages = self.loader.load(path)
+        pages = load_document(path)
         chunks = self.chunker.chunk_pages(pages)
 
         for chunk in chunks:
