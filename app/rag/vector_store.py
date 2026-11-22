@@ -123,3 +123,17 @@ class ChromaVectorStore:
         """Return total number of stored vectors in the collection."""
         collection = self._client.get_or_create_collection(name=self.collection_name)
         return collection.count()
+
+    def get_documents(self, where_clause: Optional[dict[str, Any]] = None) -> list[Document]:
+        """Fetch stored LangChain Documents matching an optional ChromaDB metadata filter."""
+        collection = self._client.get_or_create_collection(name=self.collection_name)
+        raw = collection.get(where=where_clause, include=["documents", "metadatas"])
+        docs: list[Document] = []
+        ids = raw.get("ids") or []
+        documents = raw.get("documents") or []
+        metadatas = raw.get("metadatas") or []
+        for doc_id, text, meta in zip(ids, documents, metadatas):
+            merged_meta = dict(meta or {})
+            merged_meta.setdefault("chunk_id", doc_id)
+            docs.append(Document(page_content=text, metadata=merged_meta))
+        return docs

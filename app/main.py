@@ -82,5 +82,7 @@ def analyze_sample_tender(
 
     return analyzer.analyze_tender(tenders[index])
 
-from app.api.documents import router as documents_router
+from app.api.documents import router as documents_router, search_router
 app.include_router(documents_router)
+app.include_router(search_router)
+

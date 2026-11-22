@@ -59,3 +59,34 @@ class IngestResponse(BaseModel):
     total_chunks: int = Field(..., ge=0)
     chunks_added: int = Field(..., ge=0, description="Number of new chunks embedded and stored")
     chunks_skipped: int = Field(..., ge=0, description="Number of duplicate chunks skipped via SHA-256 hash")
+
+
+class SearchRequest(BaseModel):
+    """Request payload for POST /search with metadata filtering and hybrid retrieval options."""
+
+    query: str = Field(..., min_length=1, description="Natural language or keyword search query")
+    top_k: int = Field(default=5, ge=1, le=20, description="Number of top relevant chunks to return")
+    tender_id: Optional[str] = Field(default=None, description="Filter results to a specific tender_id")
+    section_title: Optional[str] = Field(default=None, description="Filter by document section (e.g., CCTP, RC, CCAP)")
+    file_type: Optional[Literal["pdf", "docx"]] = Field(default=None, description="Filter by source file type")
+    use_hybrid: bool = Field(default=True, description="Combine semantic vector search with BM25 keyword search")
+    use_rerank: bool = Field(default=True, description="Apply lightweight lexical/metadata re-ranking")
+
+
+class SearchResultItem(BaseModel):
+    """Single retrieved document chunk with relevance score and source citation metadata."""
+
+    chunk_id: Optional[str] = None
+    content: str
+    score: float = Field(..., description="Normalized relevance score (higher is better)")
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+
+class SearchResponse(BaseModel):
+    """Standardized response returned by POST /search."""
+
+    query: str
+    total_results: int = Field(..., ge=0)
+    hybrid_used: bool
+    reranked: bool
+    results: list[SearchResultItem]

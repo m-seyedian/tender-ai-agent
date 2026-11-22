@@ -6,9 +6,16 @@ from typing import Optional
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
 
 from app.rag.ingestion import TenderIngestionPipeline
-from app.schemas.document import IngestResponse, TenderContext
+from app.rag.retriever import HybridTenderRetriever
+from app.schemas.document import (
+    IngestResponse,
+    SearchRequest,
+    SearchResponse,
+    TenderContext,
+)
 
 router = APIRouter(prefix="/documents", tags=["Documents"])
+search_router = APIRouter(tags=["Search"])
 
 ALLOWED_EXTENSIONS = {".pdf", ".docx"}
 
@@ -16,6 +23,11 @@ ALLOWED_EXTENSIONS = {".pdf", ".docx"}
 def get_ingestion_pipeline() -> TenderIngestionPipeline:
     """Dependency provider for TenderIngestionPipeline (easily overridable in tests)."""
     return TenderIngestionPipeline()
+
+
+def get_tender_retriever() -> HybridTenderRetriever:
+    """Dependency provider for HybridTenderRetriever (easily overridable in tests)."""
+    return HybridTenderRetriever()
 
 
 @router.post(
@@ -67,3 +79,22 @@ async def ingest_document(
     finally:
         await file.close()
         shutil.rmtree(tmp_dir, ignore_errors=True)
+
+
+@search_router.post(
+    "/search",
+    response_model=SearchResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Search indexed tender chunks with top-k, metadata filtering, hybrid BM25, and re-ranking",
+)
+def search_tenders(
+    request: SearchRequest,
+    retriever: HybridTenderRetriever = Depends(get_tender_retriever),
+) -> SearchResponse:
+    try:
+        return retriever.search(request)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Search execution failed: {exc}",
+        ) from exc
