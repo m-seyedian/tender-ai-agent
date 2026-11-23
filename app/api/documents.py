@@ -6,8 +6,11 @@ from typing import Optional
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
 
 from app.rag.ingestion import TenderIngestionPipeline
+from app.rag.qa import TenderQAEngine
 from app.rag.retriever import HybridTenderRetriever
 from app.schemas.document import (
+    AskRequest,
+    AskResponse,
     IngestResponse,
     SearchRequest,
     SearchResponse,
@@ -15,7 +18,7 @@ from app.schemas.document import (
 )
 
 router = APIRouter(prefix="/documents", tags=["Documents"])
-search_router = APIRouter(tags=["Search"])
+search_router = APIRouter(tags=["Search & Q&A"])
 
 ALLOWED_EXTENSIONS = {".pdf", ".docx"}
 
@@ -28,6 +31,11 @@ def get_ingestion_pipeline() -> TenderIngestionPipeline:
 def get_tender_retriever() -> HybridTenderRetriever:
     """Dependency provider for HybridTenderRetriever (easily overridable in tests)."""
     return HybridTenderRetriever()
+
+
+def get_qa_engine() -> TenderQAEngine:
+    """Dependency provider for TenderQAEngine (easily overridable in tests)."""
+    return TenderQAEngine()
 
 
 @router.post(
@@ -97,4 +105,23 @@ def search_tenders(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Search execution failed: {exc}",
+        ) from exc
+
+
+@search_router.post(
+    "/ask",
+    response_model=AskResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Ask a question grounded in retrieved tender documents with verifiable source citations",
+)
+def ask_tender_question(
+    request: AskRequest,
+    qa_engine: TenderQAEngine = Depends(get_qa_engine),
+) -> AskResponse:
+    try:
+        return qa_engine.ask(request)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Question answering failed: {exc}",
         ) from exc

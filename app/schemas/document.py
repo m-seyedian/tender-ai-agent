@@ -90,3 +90,61 @@ class SearchResponse(BaseModel):
     hybrid_used: bool
     reranked: bool
     results: list[SearchResultItem]
+
+
+class AskRequest(BaseModel):
+    """Request payload for POST /ask — grounded RAG Q&A with verifiable citations."""
+
+    question: str = Field(..., min_length=2, description="User question about the indexed tender documents")
+    tender_id: Optional[str] = Field(default=None, description="Restrict search and answer to a specific tender_id")
+    section_title: Optional[str] = Field(default=None, description="Restrict to a specific document section (e.g., CCTP, CCAP, RC)")
+    file_type: Optional[Literal["pdf", "docx"]] = Field(default=None, description="Restrict to PDF or DOCX files")
+    top_k: int = Field(default=5, ge=1, le=15, description="Maximum number of retrieved context chunks")
+    use_hybrid: bool = Field(default=True, description="Use hybrid semantic + BM25 retrieval")
+    use_rerank: bool = Field(default=True, description="Apply lightweight re-ranking to retrieved chunks")
+    min_score: float = Field(
+        default=0.1,
+        ge=0.0,
+        le=1.0,
+        description="Minimum normalized retrieval score required before calling the LLM",
+    )
+
+
+class CitationItem(BaseModel):
+    """Verified source citation linked directly to stored document metadata."""
+
+    source_index: int = Field(..., ge=1, description="1-based reference index matching [Source N] in the answer")
+    source_file: str = Field(..., description="Filename of the cited document")
+    page_number: int = Field(..., ge=1, description="1-based page or section number")
+    section_title: Optional[str] = Field(default=None, description="Document section (e.g., CCTP, CCAP)")
+    chunk_id: Optional[str] = Field(default=None, description="Unique vector store chunk identifier")
+    relevance_score: float = Field(..., description="Normalized retrieval relevance score")
+    excerpt: str = Field(..., description="Short snippet from the cited chunk for quick human verification")
+
+
+class GroundedLLMAnswer(BaseModel):
+    """Structured output schema enforced on Gemini to prevent hallucination."""
+
+    answered: bool = Field(
+        ...,
+        description="True ONLY if the retrieved context explicitly contains enough information to answer the question.",
+    )
+    answer: str = Field(
+        ...,
+        description="Grounded answer citing [Source N] inline, or a clear explanation that the information was not found.",
+    )
+    used_source_indices: list[int] = Field(
+        default_factory=list,
+        description="List of 1-based Source numbers actually used to support the answer (empty if answered=False).",
+    )
+
+
+class AskResponse(BaseModel):
+    """Standardized response returned by POST /ask."""
+
+    question: str
+    answered: bool
+    answer: str
+    citations: list[CitationItem] = Field(default_factory=list)
+    sources_consulted: int = Field(..., ge=0)
+    model_used: str
