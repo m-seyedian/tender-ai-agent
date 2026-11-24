@@ -1,0 +1,352 @@
+﻿{
+  "dataset_name": "BOAMP French Public Procurement Golden RAG Evaluation Set (v1.0)",
+  "description": "20 domain-specific French public tender Q&A pairs across RC, CCTP, CCAP, and BPU sections for measuring Hit-rate@k and MRR.",
+  "corpus_chunks": [
+    {
+      "doc_id": "rc_26_101_p1",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "rc_26_101.pdf",
+      "section_title": "RC",
+      "page_number": 1,
+      "content": "Article 1.1 : Le présent marché a pour objet la refonte et l'hébergement souverain du portail citoyen de la Métropole de Lyon."
+    },
+    {
+      "doc_id": "rc_26_101_p3",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "rc_26_101.pdf",
+      "section_title": "RC",
+      "page_number": 3,
+      "content": "Article 3.2 : La date limite de remise des offres est fixée au 18 décembre 2026 à 12h00 sur la plateforme PLACE."
+    },
+    {
+      "doc_id": "rc_26_101_p5",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "rc_26_101.pdf",
+      "section_title": "RC",
+      "page_number": 5,
+      "content": "Article 5.1 : La durée globale du marché est de 24 mois ferme, reconductible deux fois par période de 12 mois (soit 48 mois maximum)."
+    },
+    {
+      "doc_id": "rc_26_101_p7",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "rc_26_101.pdf",
+      "section_title": "RC",
+      "page_number": 7,
+      "content": "Article 7.4 : Critères d'attribution : Valeur technique (60%), Prix des prestations (30%), Performance environnementale et RSE (10%)."
+    },
+    {
+      "doc_id": "rc_26_101_p9",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "rc_26_101.pdf",
+      "section_title": "RC",
+      "page_number": 9,
+      "content": "Article 9.1 : Une visite sur site obligatoire est organisée le 02 décembre 2026 à 09h30 au siège de la direction DSI."
+    },
+    {
+      "doc_id": "cctp_26_101_p2",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "cctp_26_101.pdf",
+      "section_title": "CCTP",
+      "page_number": 2,
+      "content": "Exigence SEC-01 : L'hébergement des données à caractère personnel doit être certifié SecNumCloud ou ISO 27001 au sein de l'Union Européenne."
+    },
+    {
+      "doc_id": "cctp_26_101_p6",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "cctp_26_101.pdf",
+      "section_title": "CCTP",
+      "page_number": 6,
+      "content": "Exigence PERF-04 : Le taux de disponibilité mensuel garanti (SLA) en production est fixé à 99,95% avec une GTR de 2 heures en cas d'incident critique."
+    },
+    {
+      "doc_id": "cctp_26_101_p11",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "cctp_26_101.pdf",
+      "section_title": "CCTP",
+      "page_number": 11,
+      "content": "Exigence ACCESS-02 : L'interface front-office doit respecter intégralement le référentiel RGAA version 4.1 au niveau AA."
+    },
+    {
+      "doc_id": "cctp_26_101_p14",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "cctp_26_101.pdf",
+      "section_title": "CCTP",
+      "page_number": 14,
+      "content": "Exigence ARCH-07 : L'architecture backend doit exposer des API REST conformes à la spécification OpenAPI 3.1 et supporter l'authentification FranceConnect+."
+    },
+    {
+      "doc_id": "ccap_26_101_p4",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "ccap_26_101.pdf",
+      "section_title": "CCAP",
+      "page_number": 4,
+      "content": "Article 11.3 : Le délai global de paiement des factures est fixé à 30 jours à compter de la réception de la demande de paiement sur Chorus Pro."
+    },
+    {
+      "doc_id": "ccap_26_101_p8",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "ccap_26_101.pdf",
+      "section_title": "CCAP",
+      "page_number": 8,
+      "content": "Article 14.2 : En cas de retard imputable au titulaire, des pénalités journalières de 1/1000 du montant HT de la tranche concernée seront appliquées sans mise en demeure préalable."
+    },
+    {
+      "doc_id": "ccap_26_101_p12",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "ccap_26_101.pdf",
+      "section_title": "CCAP",
+      "page_number": 12,
+      "content": "Article 18.1 : Une retenue de garantie de 5% est appliquée sur chaque acompte ; elle peut être remplacée par une garantie à première demande."
+    },
+    {
+      "doc_id": "ccap_26_101_p15",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "ccap_26_101.pdf",
+      "section_title": "CCAP",
+      "page_number": 15,
+      "content": "Article 22.4 : La sous-traitance est autorisée dans la limite de 40% du montant total du marché sous réserve d'acceptation préalable du pouvoir adjudicateur."
+    },
+    {
+      "doc_id": "bpu_26_101_p1",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "bpu_26_101.pdf",
+      "section_title": "BPU",
+      "page_number": 1,
+      "content": "Ligne BPU-01 : Profil Architecte Cloud Senior — Tarif journalier moyen (TJM) plafond fixé à 950 EUR HT."
+    },
+    {
+      "doc_id": "bpu_26_101_p2",
+      "tender_id": "BOAMP-26-101",
+      "source_file": "bpu_26_101.pdf",
+      "section_title": "BPU",
+      "page_number": 2,
+      "content": "Ligne BPU-08 : Forfait annuel de tierce maintenance applicative (TMA) corrective et évolutive plafonné à 45 000 EUR HT/an."
+    },
+    {
+      "doc_id": "rc_26_202_p2",
+      "tender_id": "BOAMP-26-202",
+      "source_file": "rc_26_202.pdf",
+      "section_title": "RC",
+      "page_number": 2,
+      "content": "Article 2.1 (Marché Bordeaux) : Fourniture et maintenance de 120 bornes de recharge rapide pour véhicules électriques."
+    },
+    {
+      "doc_id": "cctp_26_202_p5",
+      "tender_id": "BOAMP-26-202",
+      "source_file": "cctp_26_202.pdf",
+      "section_title": "CCTP",
+      "page_number": 5,
+      "content": "Spécification ELEC-09 : Chaque borne rapide doit délivrer une puissance minimale de 150 kW DC avec connecteurs CCS Combo 2."
+    },
+    {
+      "doc_id": "ccap_26_202_p6",
+      "tender_id": "BOAMP-26-202",
+      "source_file": "ccap_26_202.pdf",
+      "section_title": "CCAP",
+      "page_number": 6,
+      "content": "Article 14.2 (Marché Bordeaux) : Les pénalités de retard sont fixées à 500 EUR forfaitaires par jour ouvré de retard."
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q01",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "RC",
+      "question": "Quel est l'objet principal du marché de la Métropole de Lyon ?",
+      "expected_answer": "La refonte et l'hébergement souverain du portail citoyen de la Métropole de Lyon.",
+      "expected_doc_id": "rc_26_101_p1",
+      "expected_source_file": "rc_26_101.pdf",
+      "expected_page": 1
+    },
+    {
+      "id": "Q02",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "RC",
+      "question": "Quelle est la date limite de remise des offres et sur quelle plateforme ?",
+      "expected_answer": "Le 18 décembre 2026 à 12h00 sur la plateforme PLACE.",
+      "expected_doc_id": "rc_26_101_p3",
+      "expected_source_file": "rc_26_101.pdf",
+      "expected_page": 3
+    },
+    {
+      "id": "Q03",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "RC",
+      "question": "Quelle est la durée ferme et la durée maximale avec reconductions ?",
+      "expected_answer": "24 mois ferme, reconductible deux fois 12 mois (48 mois maximum).",
+      "expected_doc_id": "rc_26_101_p5",
+      "expected_source_file": "rc_26_101.pdf",
+      "expected_page": 5
+    },
+    {
+      "id": "Q04",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "RC",
+      "question": "Quels sont les critères d'attribution et leur pondération ?",
+      "expected_answer": "Valeur technique (60%), Prix des prestations (30%), Performance environnementale et RSE (10%).",
+      "expected_doc_id": "rc_26_101_p7",
+      "expected_source_file": "rc_26_101.pdf",
+      "expected_page": 7
+    },
+    {
+      "id": "Q05",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "RC",
+      "question": "Quand a lieu la visite sur site obligatoire ?",
+      "expected_answer": "Le 02 décembre 2026 à 09h30 au siège de la direction DSI.",
+      "expected_doc_id": "rc_26_101_p9",
+      "expected_source_file": "rc_26_101.pdf",
+      "expected_page": 9
+    },
+    {
+      "id": "Q06",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "CCTP",
+      "question": "Quelle certification est exigée pour l'hébergement des données personnelles (Exigence SEC-01) ?",
+      "expected_answer": "Certification SecNumCloud ou ISO 27001 au sein de l'Union Européenne.",
+      "expected_doc_id": "cctp_26_101_p2",
+      "expected_source_file": "cctp_26_101.pdf",
+      "expected_page": 2
+    },
+    {
+      "id": "Q07",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "CCTP",
+      "question": "Quel est le SLA de disponibilité mensuel et la GTR critique (PERF-04) ?",
+      "expected_answer": "Disponibilité mensuelle garantie de 99,95% avec une GTR de 2 heures.",
+      "expected_doc_id": "cctp_26_101_p6",
+      "expected_source_file": "cctp_26_101.pdf",
+      "expected_page": 6
+    },
+    {
+      "id": "Q08",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "CCTP",
+      "question": "Quel niveau de conformité RGAA est requis pour le front-office ?",
+      "expected_answer": "Référentiel RGAA version 4.1 au niveau AA.",
+      "expected_doc_id": "cctp_26_101_p11",
+      "expected_source_file": "cctp_26_101.pdf",
+      "expected_page": 11
+    },
+    {
+      "id": "Q09",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "CCTP",
+      "question": "Quelle norme d'API et quel système d'authentification sont demandés (ARCH-07) ?",
+      "expected_answer": "API REST conformes à OpenAPI 3.1 et support de FranceConnect+.",
+      "expected_doc_id": "cctp_26_101_p14",
+      "expected_source_file": "cctp_26_101.pdf",
+      "expected_page": 14
+    },
+    {
+      "id": "Q10",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "CCAP",
+      "question": "Quel est le délai global de paiement sur Chorus Pro (Article 11.3) ?",
+      "expected_answer": "30 jours à compter de la réception de la demande de paiement sur Chorus Pro.",
+      "expected_doc_id": "ccap_26_101_p4",
+      "expected_source_file": "ccap_26_101.pdf",
+      "expected_page": 4
+    },
+    {
+      "id": "Q11",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "CCAP",
+      "question": "Quel est le montant des pénalités journalières de retard selon l'Article 14.2 ?",
+      "expected_answer": "1/1000 du montant HT de la tranche concernée par jour de retard.",
+      "expected_doc_id": "ccap_26_101_p8",
+      "expected_source_file": "ccap_26_101.pdf",
+      "expected_page": 8
+    },
+    {
+      "id": "Q12",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "CCAP",
+      "question": "Quel est le pourcentage de retenue de garantie prévu à l'Article 18.1 ?",
+      "expected_answer": "5% sur chaque acompte, remplaçable par une garantie à première demande.",
+      "expected_doc_id": "ccap_26_101_p12",
+      "expected_source_file": "ccap_26_101.pdf",
+      "expected_page": 12
+    },
+    {
+      "id": "Q13",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "CCAP",
+      "question": "Quel est le plafond autorisé pour la sous-traitance (Article 22.4) ?",
+      "expected_answer": "40% du montant total du marché sous réserve d'acceptation préalable.",
+      "expected_doc_id": "ccap_26_101_p15",
+      "expected_source_file": "ccap_26_101.pdf",
+      "expected_page": 15
+    },
+    {
+      "id": "Q14",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "BPU",
+      "question": "Quel est le TJM plafond pour un Architecte Cloud Senior (Ligne BPU-01) ?",
+      "expected_answer": "950 EUR HT.",
+      "expected_doc_id": "bpu_26_101_p1",
+      "expected_source_file": "bpu_26_101.pdf",
+      "expected_page": 1
+    },
+    {
+      "id": "Q15",
+      "tender_id": "BOAMP-26-101",
+      "section_title": "BPU",
+      "question": "Quel est le plafond annuel du forfait de TMA (Ligne BPU-08) ?",
+      "expected_answer": "45 000 EUR HT/an.",
+      "expected_doc_id": "bpu_26_101_p2",
+      "expected_source_file": "bpu_26_101.pdf",
+      "expected_page": 2
+    },
+    {
+      "id": "Q16",
+      "tender_id": "BOAMP-26-101",
+      "section_title": null,
+      "question": "Où doivent être hébergées les données à caractère personnel et sous quelle norme ?",
+      "expected_answer": "Au sein de l'Union Européenne avec certification SecNumCloud ou ISO 27001.",
+      "expected_doc_id": "cctp_26_101_p2",
+      "expected_source_file": "cctp_26_101.pdf",
+      "expected_page": 2
+    },
+    {
+      "id": "Q17",
+      "tender_id": "BOAMP-26-101",
+      "section_title": null,
+      "question": "Comment la retenue de garantie de 5% peut-elle être remplacée ?",
+      "expected_answer": "Par une garantie à première demande.",
+      "expected_doc_id": "ccap_26_101_p12",
+      "expected_source_file": "ccap_26_101.pdf",
+      "expected_page": 12
+    },
+    {
+      "id": "Q18",
+      "tender_id": "BOAMP-26-202",
+      "section_title": "RC",
+      "question": "Combien de bornes de recharge rapide sont prévues dans le marché de Bordeaux ?",
+      "expected_answer": "120 bornes de recharge rapide pour véhicules électriques.",
+      "expected_doc_id": "rc_26_202_p2",
+      "expected_source_file": "rc_26_202.pdf",
+      "expected_page": 2
+    },
+    {
+      "id": "Q19",
+      "tender_id": "BOAMP-26-202",
+      "section_title": "CCTP",
+      "question": "Quelle puissance minimale DC et quel connecteur sont exigés (ELEC-09) ?",
+      "expected_answer": "150 kW DC avec connecteurs CCS Combo 2.",
+      "expected_doc_id": "cctp_26_202_p5",
+      "expected_source_file": "cctp_26_202.pdf",
+      "expected_page": 5
+    },
+    {
+      "id": "Q20",
+      "tender_id": "BOAMP-26-202",
+      "section_title": "CCAP",
+      "question": "Quel est le montant des pénalités de retard dans l'Article 14.2 du marché de Bordeaux ?",
+      "expected_answer": "500 EUR forfaitaires par jour ouvré de retard.",
+      "expected_doc_id": "ccap_26_202_p6",
+      "expected_source_file": "ccap_26_202.pdf",
+      "expected_page": 6
+    }
+  ]
+}

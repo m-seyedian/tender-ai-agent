@@ -31,3 +31,10 @@ tender-ai-agent/
 ├── .env.example    # Template for environment variables
 └── requirements.txt
 
+
+## RAG Pipeline & Retrieval Evaluation
+
+- **Endpoints**: `POST /documents/ingest`, `POST /search` (Hybrid Semantic + BM25 + RRF), `POST /ask` (Grounded Gemini 2.5 Flash Q&A with verified `[Source N]` citations & 4-layer anti-hallucination guardrails).
+- **Benchmark (`eval/golden_qa_dataset.json`)**: Curated 20-question domain benchmark modeled on real BOAMP `RC`, `CCTP`, `CCAP`, and `BPU` clauses (`Hit-rate@1 = 100.0%`, `Hit-rate@3 = 100.0%`, `MRR = 1.0000` — see `eval/results.md`).
+- **Re-run Evaluation**: `python -m eval.evaluate_rag`
+
